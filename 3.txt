@@ -1,0 +1,30 @@
+from collections import Counter
+
+def a(s):  # Longest word
+    print(f"Longest word: {max(s.split(), key=len)}")
+
+def b(s, c):  # Frequency of character
+    print(f"Frequency of '{c}': {s.count(c)}")
+
+def c(s):  # Palindrome check
+    print("Palindrome." if s == s[::-1] else "Not a palindrome.")
+
+def d(s, sub):  # Index of substring
+    idx = s.find(sub)
+    print(f"Index of '{sub}': {idx}" if idx != -1 else f"'{sub}' not found.")
+
+def e(s):  # Word occurrences
+    word_counts = Counter(s.split())
+    for w, n in word_counts.items():  # Ensure proper indentation here
+        print(f"{w}: {n} times")
+
+def main():
+    s = input("Enter a string: ")
+    a(s)
+    b(s, input("Enter a character: "))
+    c(s)
+    d(s, input("Enter a substring: "))
+    e(s)
+
+if __name__ == "__main__":
+    main()

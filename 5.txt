@@ -1,0 +1,36 @@
+marks = [int(input(f"Enter marks for student {i+1}: ")) for i in range(int(input("Enter no. of students: ")))]
+print("Marks:", marks)
+
+def selection_sort(marks):
+    for i in range(len(marks)):
+        min_idx = i
+        for j in range(i+1, len(marks)):
+            if marks[min_idx] > marks[j]:
+                min_idx = j
+        marks[i], marks[min_idx] = marks[min_idx], marks[i]
+
+selection_sort(marks)
+print("Sorted marks:", marks)
+
+
+
+2)
+	marks = []
+x = int(input("Enter no of students: "))
+print("Enter marks for", x, "students:")
+
+for _ in range(x):
+    marks.append(int(input()))
+
+print("Marks:", marks)
+
+def bubble_sort(marks):
+    n = len(marks)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if marks[j] > marks[j+1]:
+                marks[j], marks[j+1] = marks[j+1], marks[j]
+
+bubble_sort(marks)
+
+print("Sorted marks:", marks)

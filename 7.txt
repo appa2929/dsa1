@@ -1,0 +1,104 @@
+def input_percentage():
+    return [float(input(f"Enter percentage of Student {i+1}: ")) for i in range(int(input("Enter number of Students: ")))]
+
+def print_percentage(perc):
+    print("\n".join(map(str, perc)))
+
+def percentage_partition(perc, start, end):
+    pivot, low, high = perc[start], start + 1, end
+    while True:
+        while low <= high and perc[low] <= pivot:
+            low += 1
+        while low <= high and perc[high] >= pivot:
+            high -= 1
+        if low <= high:
+            perc[low], perc[high] = perc[high], perc[low]
+        else:
+            break
+    perc[start], perc[high] = perc[high], perc[start]
+    return high
+
+def quick_sort(perc, start, end):
+    if start < end:
+        part = percentage_partition(perc, start, end)
+        quick_sort(perc, start, part - 1)
+        quick_sort(perc, part + 1, end)
+    return perc
+
+def display_top_five(perc):
+    print("Top Five Percentages:", sorted(perc, reverse=True)[:5])
+
+unsorted_percentage = []
+while True:
+    print("\n1. Accept Percentages\n2. Display Percentages\n3. Quick Sort\n4. Exit")
+    ch = int(input("Enter choice: "))
+    if ch == 1:
+        unsorted_percentage = input_percentage()
+    elif ch == 2:
+        print_percentage(unsorted_percentage)
+    elif ch == 3:
+        sorted_percentage = quick_sort(unsorted_percentage, 0, len(unsorted_percentage) - 1)
+        print("Sorted Percentages:")
+        print_percentage(sorted_percentage)
+        if input("Display Top 5 Percentages? (yes/no): ").lower() == 'yes':
+            display_top_five(sorted_percentage)
+    elif ch == 4:
+        print("Thanks for using the program!")
+        break
+    else:
+        print("Invalid Choice!")
+
+def removeDuplicate(d):
+    return list(set(d))
+
+def intersection(lst1, lst2):
+    return [val for val in lst1 if val in lst2]
+
+def union(lst1, lst2):
+    return list(set(lst1 + lst2))
+
+def diff(lst1, lst2):
+    return [val for val in lst1 if val not in lst2]
+
+def CB(lst1, lst2):
+    lst3 = intersection(lst1, lst2)
+    print("\nStudents who play both cricket & badminton:", lst3)
+    return len(lst3)
+
+def eCeB(lst1, lst2):
+    lst3 = diff(lst1, lst2) + diff(lst2, lst1)
+    print("\nStudents who play either but not both:", lst3)
+    return len(lst3)
+
+def nCnB(lst1, lst2, lst3):
+    lst4 = diff(lst1, union(lst2, lst3))
+    print("\nStudents who play neither cricket nor badminton:", lst4)
+    return len(lst4)
+
+def CBnF(lst1, lst2, lst3):
+    lst4 = diff(intersection(lst1, lst2), lst3)
+    print("\nStudents who play cricket & football but not badminton:", lst4)
+    return len(lst4)
+
+SEComp = [input() for _ in range(int(input("\nEnter students in SE COMP: ")))]
+print("Students in SEComp:", SEComp)
+Cricket = removeDuplicate([input() for _ in range(int(input("\nCricket players: ")))])
+Football = removeDuplicate([input() for _ in range(int(input("\nFootball players: ")))])
+Badminton = removeDuplicate([input() for _ in range(int(input("\nBadminton players: ")))])
+
+while True:
+    print("\n1. Both Cricket & Badminton\n2. Either but not both\n3. Neither Cricket nor Badminton\n4. Cricket & Football but not Badminton\n5. Exit")
+    ch = int(input("Enter your choice: "))
+    if ch == 1:
+        print("Count:", CB(Cricket, Badminton))
+    elif ch == 2:
+        print("Count:", eCeB(Cricket, Badminton))
+    elif ch == 3:
+        print("Count:", nCnB(SEComp, Cricket, Badminton))
+    elif ch == 4:
+        print("Count:", CBnF(Cricket, Football, Badminton))
+    elif ch == 5:
+        print("Thanks for using!")
+        break
+    else:
+        print("Invalid choice!")

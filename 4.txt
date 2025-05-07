@@ -1,0 +1,33 @@
+def generate_Magic_Square(size):
+    ms = [[0] * size for _ in range(size)]
+    i, j, num = size // 2, size - 1, 1
+
+    while num <= size * size:
+        if i < 0 and j == size: 
+            i, j = 0, size - 2
+        if j == size: 
+            j = 0
+        if i < 0: 
+            i = size - 1
+        if ms[i][j]: 
+            i, j = i + 1, j - 2
+            continue
+
+        ms[i][j], num = num, num + 1
+        i, j = i - 1, j + 1
+
+    print(f"\nMagic Square ({size}x{size}) with sum {size * (size * size + 1) // 2}:")
+    for row in ms:
+        print(" | ".join(f"{x:2}" for x in row))
+
+while True:
+    n = int(input("\nEnter an ODD size for the Magic Square: "))
+    if n % 2 == 0:
+        print("Please enter an ODD number.")
+        continue
+
+    generate_Magic_Square(n)
+
+    if input("\nMake another square? (yes/no): ").lower() != 'yes':
+        print("Goodbye!")
+        break

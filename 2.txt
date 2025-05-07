@@ -1,0 +1,46 @@
+def absentSC(lst):
+    return lst.count(0)
+
+def maxMarks(lst):
+    return max(lst)
+
+def largestMFreq(lst):
+    return lst.count(max(lst))
+
+def minMarks(lst):
+    return min(lst)
+
+def minMFreq(lst):
+    return lst.count(min(lst))
+
+def averageOfMarks(lst):
+    return sum(lst) / len(lst)
+
+def main():
+    lst = [int(input(f"Enter marks for student {i+1}: ")) for i in range(int(input("Enter No of Students: ")))]
+    
+    while True:
+        print("\n1) Average\n2) Maximum\n3) Minimum\n4) Largest Marks Frequency\n5) Minimum Marks Frequency\n6) Count of Absent Students\n7) New List\n8) Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            print("Average marks:", averageOfMarks(lst))
+        elif choice == "2":
+            print("Maximum marks:", maxMarks(lst))
+        elif choice == "3":
+            print("Minimum marks:", minMarks(lst))
+        elif choice == "4":
+            print("Largest marks frequency:", largestMFreq(lst))
+        elif choice == "5":
+            print("Minimum marks frequency:", minMFreq(lst))
+        elif choice == "6":
+            print("Absent students:", absentSC(lst))
+        elif choice == "7":
+            lst = [int(input(f"Enter marks for student {i+1}: ")) for i in range(int(input("Enter No of Students: ")))]
+        elif choice == "8":
+            break
+        else:
+            print("Invalid choice, try again.")
+
+main()
